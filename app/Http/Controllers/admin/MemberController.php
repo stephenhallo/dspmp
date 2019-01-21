@@ -16,7 +16,7 @@ class MemberController extends BaseController
      */
     public function index()
     {
-        $members = Member::select(['id', 'alias', 'type', 'status'])->paginate(15);
+        $members = Member::select(['id', 'alias', 'type', 'status'])->orderBy('id', 'desc')->paginate(15);
         return $this->success($members);
     }
 

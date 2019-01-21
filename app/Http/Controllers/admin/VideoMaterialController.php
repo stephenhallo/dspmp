@@ -17,7 +17,7 @@ class VideoMaterialController extends BaseController
     {
         $materials = VideoMaterial::select(['id', 'title', 'author', 'created_at'])->with(['author' => function($query){
             $query->select(['id', 'alias']);
-        }])->paginate(15);
+        }])->orderBy('id', 'desc')->paginate(15);
         return $this->success($materials);
     }
 

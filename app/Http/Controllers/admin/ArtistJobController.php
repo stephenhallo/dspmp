@@ -20,7 +20,7 @@ class ArtistJobController extends BaseController
             $query->select(['id', 'alias']);
         }])->with(['operater' => function($query){
             $query->select(['id', 'alias']);
-            }])->paginate(15);
+            }])->orderBy('id', 'desc')->paginate(15);
         return $this->success($jobs);
     }
 
