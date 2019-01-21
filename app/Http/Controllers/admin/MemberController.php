@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Models\ArtistJob;
 use App\Models\Member;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -71,7 +72,13 @@ class MemberController extends BaseController
             return $this->failed('参数不正确');
         }
         $member = Member::select(['id', 'alias', 'type', 'status'])->find($id);
+        $type = $member->type;
         if($member->delete()){
+            if($type == 1){
+                ArtistJob::where(['artister_id' => $id])->delete();
+            }else{
+                ArtistJob::where(['operater_id' => $id])->delete();
+            }
             return $this->message('删除成功');
         }else{
             return $this->failed('删除失败');
