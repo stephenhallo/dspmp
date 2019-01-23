@@ -70,7 +70,7 @@ class UserController extends BaseController
 
         $user->alias = $request->input('alias');
         $user->status = $request->input('status');
-        if($request->password){
+        if($request->input('password')){
             $user->password = bcrypt($request->password);
         }
         if($user->save()){

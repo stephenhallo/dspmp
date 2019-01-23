@@ -84,9 +84,16 @@ class AuthenticateController extends BaseController
         }
         $openid = $access['openid'];
 
-        $isMember = Member::where(['wx_openid' => $openid])->first();
+        $isMember = Member::withTrashed()->where(['wx_openid' => $openid])->first();
+
+        if($isMember->status == '0'){
+            return $this->failed('该用户已被禁用，请联系管理员');
+        }
 
         if($isMember){
+            if($isMember->deleted_at != null){
+                $isMember->restore();
+            }
             $token = auth('member')->login($isMember);
             $user = auth('member')->user();
             $user->token = $token;

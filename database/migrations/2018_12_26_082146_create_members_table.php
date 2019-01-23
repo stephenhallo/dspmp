@@ -21,7 +21,7 @@ class CreateMembersTable extends Migration
             $table->string('phone')->nullable()->comment('手机号码');
             $table->string('avatar')->nullable()->comment('头像');
             $table->string('alias')->nullable()->comment('昵称');
-            $table->smallInteger('type')->default(1)->comment('类别，1艺人，2运营');
+            $table->smallInteger('type')->default(1)->comment('类别，1艺人，2运营，3未绑定');
             $table->string('wx_openid')->nullable()->comment('微信用户唯一标识');
             $table->bigInteger('last_logined_ip')->default(0)->comment('最后登录ip');
             $table->timestamp('last_logined_at')->nullable()->comment('最后登录时间');
